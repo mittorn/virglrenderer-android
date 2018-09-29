@@ -1,0 +1,1 @@
+i=2;while [ $i -le 32 ]; do echo '<service' android:name=\"process.p$i\" android:process=\":p$i\" 'android:exported="true"/>';i=$(($i+1));done
