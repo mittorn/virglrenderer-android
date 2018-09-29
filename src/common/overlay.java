@@ -54,6 +54,12 @@ public class overlay {
 			public void run()
 			{
 				int sock = nativeOpen();
+				if( sock < 0 )
+				{
+					Log.d(T, "Failed to open socket!");
+					ctx.stopService( new Intent().setClassName(ctx, "process.p1"));
+					return;
+				}
 				int fd;
 				while((fd = nativeAccept(sock)) >= 0)
 				{
@@ -77,6 +83,12 @@ public class overlay {
 			public void run()
 			{
 				int fd = nativeOpen();
+				if( fd < 0 )
+				{
+					Log.d(T, "Failed to open socket!");
+					ctx.stopService( new Intent().setClassName(ctx, "process.p"+svc_id));
+					return;
+				}
 				fd = nativeAccept(fd);
 				nativeUnlink();
 				start_next(svc_id);
